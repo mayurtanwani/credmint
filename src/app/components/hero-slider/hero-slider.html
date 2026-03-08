@@ -1,0 +1,28 @@
+<div class="hero-slider">
+  <div class="hero-slider__track" [style.transform]="'translateX(' + (-currentSlide * 100) + '%)'">
+    <div *ngFor="let slide of slides" class="hero-slider__slide">
+      <div class="slide-content">
+        <p class="slide-category">{{ slide.category }}</p>
+        <h2 class="slide-title">{{ slide.title }}</h2>
+        <h3 class="slide-subtitle">{{ slide.subtitle }}</h3>
+        <button class="slide-btn" *ngIf="slide.buttonText">{{ slide.buttonText }}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="hero-slider__arrows">
+    <button mat-icon-button (click)="prev()" aria-label="Previous slide"><mat-icon>chevron_left</mat-icon></button>
+    <button mat-icon-button (click)="next()" aria-label="Next slide"><mat-icon>chevron_right</mat-icon></button>
+  </div>
+
+  <div class="hero-slider__dots">
+    <button
+      *ngFor="let slide of slides; let i = index"
+      class="dot"
+      [class.dot--active]="i === currentSlide"
+      (click)="setSlide(i)"
+      aria-label="Go to slide"
+    ></button>
+  </div>
+</div>

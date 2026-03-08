@@ -1,0 +1,109 @@
+<section class="hero-container">
+  <!-- Top Row: Left Banner, Center Slider, Right double banners -->
+  <div class="hero-grid-top">
+    <!-- Left Huge Banner -->
+    <div class="hero-grid-top__left">
+      <app-promo-card 
+        category="Asus" 
+        title="Supper Sale" 
+        subtitle="Laptop Gaming" 
+        buttonText="Order Now" 
+        layout="center">
+      </app-promo-card>
+    </div>
+
+    <!-- Center Slider -->
+    <div class="hero-grid-top__center">
+      <app-hero-slider></app-hero-slider>
+    </div>
+
+    <!-- Right Side Banners -->
+    <div class="hero-grid-top__right">
+      <app-promo-card 
+        category="Big deal" 
+        title="Black Friday" 
+        subtitle="Buy 1 Get 1">
+      </app-promo-card>
+      <app-promo-card 
+        category="Fujiwa" 
+        title="ION Alkaline" 
+        subtitle="Micronutrient Supplements">
+      </app-promo-card>
+    </div>
+  </div>
+
+  <!-- Bottom Row: 5 Small Banners -->
+  <div class="hero-grid-bottom">
+    <app-promo-card category="Wine" title="Drunkenness" subtitle="Deep Flavor"></app-promo-card>
+    <app-promo-card category="Cosmetic" title="MAXIMI" subtitle="Sale 50%"></app-promo-card>
+    <app-promo-card category="Sunglasses" title="Authentic" subtitle="Sale off 50%"></app-promo-card>
+    <app-promo-card category="Hand Wash" title="Clean hands" subtitle="Clean bacteria"></app-promo-card>
+    <app-promo-card category="Fashion" title="Nice bag" subtitle="Nice style"></app-promo-card>
+  </div>
+</section>
+
+<!-- Shop By Categories Section -->
+<app-category-slider></app-category-slider>
+
+<section class="hero-container">
+  <div class="promo-grid-half">
+    <app-promo-card
+      category="Hot Deal"
+      title="TOURS SAFE<br>TRUE DISCOUNT"
+      buttonText="Order Now">
+    </app-promo-card>
+    <app-promo-card
+      category="New Product"
+      title="EXPERIENCE TECHNOLOGY<br>RELAX HIGHTLY"
+      buttonText="Order Now">
+    </app-promo-card>
+  </div>
+</section>
+
+<!-- Promo Product Slider Section -->
+<app-promo-product-slider></app-promo-product-slider>
+
+<section class="hero-container">
+  <div class="promo-banner-full">
+    <app-promo-card
+      category="New Product"
+      title="FASHIONABLE WALLETS<br>BIG GOOD SALE FOR HER"
+      buttonText="Order Now"
+      layout="end">
+    </app-promo-card>
+  </div>
+</section>
+
+<!-- Technology Section -->
+<app-technology-section></app-technology-section>
+
+<!-- Generic Product Slider used for Watch Section -->
+<app-product-slider-section
+  sectionTitle="Watch"
+  [categories]="watchCategories"
+  [products]="watchProducts()">
+</app-product-slider-section>
+
+<!-- Cosmetics Section -->
+<app-product-slider-section
+  sectionTitle="Cosmetics"
+  [categories]="cosmeticsCategories"
+  [products]="cosmeticsProducts()">
+</app-product-slider-section>
+
+<!-- Real Estate Section -->
+<app-product-slider-section
+  sectionTitle="Real Estate"
+  [categories]="realEstateCategories"
+  [products]="realEstateProducts()">
+</app-product-slider-section>
+
+<!-- Luxury Food Section -->
+<app-product-slider-section
+  sectionTitle="Luxury Food"
+  [categories]="luxuryFoodCategories"
+  [products]="luxuryFoodProducts()">
+</app-product-slider-section>
+
+<!-- Features / Benefits Section -->
+<app-features-section></app-features-section>

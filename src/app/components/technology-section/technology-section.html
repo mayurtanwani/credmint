@@ -1,0 +1,41 @@
+<section class="tech-section">
+  <div class="tech-header">
+    <h2 class="tech-header__title">Technology</h2>
+    
+    <div class="tech-header__actions">
+      <nav class="tech-nav">
+        <a *ngFor="let cat of categories" 
+           href="#" 
+           [class.active]="cat === activeCategory"
+           (click)="selectCategory(cat, $event)">
+          {{ cat }}
+        </a>
+      </nav>
+      
+      <div class="nav-controls">
+        <button mat-icon-button class="nav-btn" aria-label="Previous">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button mat-icon-button class="nav-btn" aria-label="Next">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tech-grid">
+    <ng-container *ngFor="let p of techProducts()">
+      <app-horizontal-product-card
+        *ngIf="activeCategory === 'All' || p.subCategory === activeCategory"
+        [badgeText]="p.badgeText"
+        [badgeType]="p.badgeType"
+        [title]="p.title"
+        [price]="p.price"
+        [originalPrice]="p.originalPrice"
+        [vendor]="p.vendor"
+        [imageUrl]="p.imageUrl"
+        [product]="p">
+      </app-horizontal-product-card>
+    </ng-container>
+  </div>
+</section>

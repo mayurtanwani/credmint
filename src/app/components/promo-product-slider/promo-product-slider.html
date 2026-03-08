@@ -1,0 +1,36 @@
+<div class="promo-product-slider">
+  <div class="header">
+    <h2 class="header__title">Promo Product</h2>
+    <div class="header__controls">
+      <a href="#" class="see-all-link">See All</a>
+      <button mat-icon-button class="nav-btn" (click)="scrollLeft(track)" aria-label="Scroll left">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button mat-icon-button class="nav-btn" (click)="scrollRight(track)" aria-label="Scroll right">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="track-container">
+    <div class="track" #track>
+      <div 
+        *ngFor="let product of promoProducts" 
+        class="card-wrapper"
+      >
+        <app-promo-product-card
+          [badgeText]="product.badgeText"
+          [title]="product.title"
+          [price]="product.price"
+          [originalPrice]="product.originalPrice"
+          [soldCount]="product.soldCount"
+          [inStockCount]="product.inStockCount"
+          [days]="product.days"
+          [hours]="product.hours"
+          [minutes]="product.minutes"
+          [seconds]="product.seconds"
+        ></app-promo-product-card>
+      </div>
+    </div>
+  </div>
+</div>

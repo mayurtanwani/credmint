@@ -1,0 +1,55 @@
+<article class="promo-product-card">
+  <!-- Left side image -->
+  <div class="promo-product-card__image-container">
+    <div *ngIf="badgeText" class="promo-product-card__badge">{{ badgeText }}</div>
+    <div class="promo-product-card__image-placeholder">
+      <span class="placeholder-text">1:1</span>
+    </div>
+  </div>
+
+  <!-- Right side details -->
+  <div class="promo-product-card__details">
+    <h3 class="product-title">{{ title }}</h3>
+    
+    <div class="product-pricing">
+      <span class="product-pricing__current">{{ price }}</span>
+      <span class="product-pricing__original" *ngIf="originalPrice">{{ originalPrice }}</span>
+    </div>
+
+    <!-- Stock / Progress Bar -->
+    <div class="product-stock">
+      <div class="product-stock__labels">
+        <span class="stock-sold">Sold: {{ soldCount }}</span>
+        <span class="stock-remaining">In Stock: {{ inStockCount }}</span>
+      </div>
+      <div class="product-stock__progress-bar">
+        <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+      </div>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="product-countdown">
+      <div class="time-block">
+        <span class="time-value">{{ days }}</span>
+        <span class="time-label">Day</span>
+      </div>
+      <span class="time-colon">:</span>
+      <div class="time-block">
+        <span class="time-value">{{ hours }}</span>
+        <span class="time-label">Hour</span>
+      </div>
+      <span class="time-colon">:</span>
+      <div class="time-block">
+        <span class="time-value">{{ minutes }}</span>
+        <span class="time-label">Min</span>
+      </div>
+      <span class="time-colon">:</span>
+      <div class="time-block">
+        <span class="time-value">{{ seconds }}</span>
+        <span class="time-label">Sec</span>
+      </div>
+    </div>
+
+    <button class="add-to-cart-btn" (click)="addToCart()">Add To Cart</button>
+  </div>
+</article>

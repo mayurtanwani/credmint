@@ -1,0 +1,116 @@
+:host {
+  display: block;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.tech-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tech-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  
+  // Responsive header stacking
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+
+.tech-nav {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  // hide scrollbars
+  &::-webkit-scrollbar { display: none; }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #888;
+    text-decoration: none;
+    padding-bottom: 4px;
+    white-space: nowrap;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #111;
+    }
+
+    &.active {
+      color: #6cc141; // active green
+      border-bottom: 2px solid #6cc141;
+    }
+  }
+}
+
+.nav-controls {
+  display: flex;
+  gap: 8px;
+
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    background: #f9f9f9;
+    border-radius: 4px;
+    
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+    }
+
+    &:hover {
+      background: #eee;
+      color: #111;
+    }
+  }
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  row-gap: 32px; // slightly more space between rows so add-to-cart has room
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}

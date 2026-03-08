@@ -1,0 +1,49 @@
+<section class="p-slider-section">
+  <div class="p-slider-header">
+    <h2 class="p-slider-header__title">{{ sectionTitle }}</h2>
+    
+    <div class="p-slider-header__actions">
+      <nav class="p-slider-nav">
+        <a *ngFor="let cat of categories" 
+           href="#" 
+           [class.active]="cat === activeCategory"
+           (click)="selectCategory(cat, $event)">
+          {{ cat }}
+        </a>
+      </nav>
+      
+      <div class="nav-controls">
+        <button mat-icon-button class="nav-btn" (click)="scrollLeft(track)" aria-label="Previous">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button mat-icon-button class="nav-btn" (click)="scrollRight(track)" aria-label="Next">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-slider-track-container">
+    <div class="p-slider-track" #track>
+      <ng-container *ngFor="let p of products">
+        <div 
+          *ngIf="activeCategory === 'All' || p.subCategory === activeCategory"
+          class="card-wrapper"
+          [class.card-wrapper--3-2]="p.imageRatio === '3:2'"
+        >
+          <app-product-card
+            [badgeText]="p.badgeText"
+            [badgeType]="p.badgeType"
+            [title]="p.title"
+            [price]="p.price"
+            [originalPrice]="p.originalPrice"
+            [vendor]="p.vendor"
+            [imageUrl]="p.imageUrl"
+            [imageRatio]="p.imageRatio || '1:1'"
+            [product]="p">
+          </app-product-card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

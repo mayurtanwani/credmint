@@ -1,0 +1,11 @@
+<section class="features-section">
+  <div class="features-grid">
+    <div class="feature-item" *ngFor="let item of items">
+      <div class="feature-icon">
+        <mat-icon>{{ item.icon }}</mat-icon>
+      </div>
+      <h3 class="feature-title">{{ item.title }}</h3>
+      <p class="feature-desc" [innerHTML]="item.description"></p>
+    </div>
+  </div>
+</section>

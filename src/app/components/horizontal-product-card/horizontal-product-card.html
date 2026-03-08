@@ -1,0 +1,35 @@
+<article class="h-card">
+  <div class="h-card__left">
+    <div class="image-wrapper">
+      <div *ngIf="badgeType !== 'none'" class="h-card__badge" [ngClass]="'h-card__badge--' + badgeType">
+        {{ badgeText }}
+      </div>
+      <img *ngIf="imageUrl" [src]="imageUrl" [alt]="title" class="h-card__image" />
+      <div *ngIf="!imageUrl" class="h-card__placeholder">
+        <span class="placeholder-text">1:1</span>
+      </div>
+      
+      <!-- Overlays (visible on hover) -->
+      <div class="h-card__overlay">
+        <button class="icon-btn" aria-label="Favorite"><mat-icon>favorite_border</mat-icon></button>
+        <button class="icon-btn" aria-label="Quick View"><mat-icon>visibility</mat-icon></button>
+      </div>
+    </div>
+    
+    <!-- Add to cart button (visible on hover) -->
+    <button class="h-card__add-to-cart" (click)="addToCart($event)">Add To Cart</button>
+  </div>
+  
+  <div class="h-card__right">
+    <h3 class="product-title" [title]="title">{{ title }}</h3>
+    
+    <div class="product-pricing">
+      <span class="price-current">{{ price }}</span>
+      <span class="price-original" *ngIf="originalPrice">{{ originalPrice }}</span>
+    </div>
+
+    <div class="product-vendor">
+      by <a href="#" class="vendor-link">{{ vendor }}</a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,198 @@
+<mat-sidenav-container class="sidenav-container" autosize>
+
+  <!-- ── Side Drawer ──────────────────────────────────────────── -->
+  <mat-sidenav
+    mode="over"
+    [(opened)]="mobileMenuOpen"
+    fixedInViewport
+    class="side-drawer"
+    aria-label="Navigation drawer"
+  >
+    <mat-nav-list>
+      <a
+        *ngFor="let link of navLinks"
+        mat-list-item
+        [href]="link.href"
+        class="drawer-nav-link"
+        (click)="closeMobileMenu()"
+      >{{ link.label }}</a>
+    </mat-nav-list>
+    <div class="drawer-social">
+      <a *ngFor="let s of socialLinks" [href]="s.href" [attr.aria-label]="s.ariaLabel" mat-icon-button class="drawer-social-icon">
+        <mat-icon>{{ s.materialIcon }}</mat-icon>
+      </a>
+    </div>
+  </mat-sidenav>
+
+  <!-- ── Main content ─────────────────────────────────────────── -->
+  <mat-sidenav-content>
+    <header class="top-bar">
+
+      <!-- Row 1: Ribbon (desktop only) -->
+      <div class="top-bar__ribbon hide-mobile">
+        <div class="top-bar__container">
+          <nav class="top-bar__social" aria-label="Social links">
+            <a *ngFor="let s of socialLinks" [href]="s.href" [attr.aria-label]="s.ariaLabel" mat-icon-button class="social-icon-btn">
+              <mat-icon>{{ s.materialIcon }}</mat-icon>
+            </a>
+          </nav>
+          <nav class="top-bar__nav" aria-label="Primary navigation">
+            <a *ngFor="let link of navLinks" [href]="link.href" mat-button class="nav-link">{{ link.label }}</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Row 2: Main Toolbar -->
+      <mat-toolbar class="top-bar__toolbar">
+
+        <!-- LEFT: hamburger (mobile) / invisible spacer (desktop) -->
+        <div class="toolbar-left">
+          <button mat-icon-button aria-label="Open navigation menu" class="show-mobile" (click)="toggleMobileMenu()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+
+        <!-- CENTER: search bar (desktop only) -->
+        <form class="top-bar__search hide-mobile" (ngSubmit)="onSearch()" role="search">
+          <div class="search-input-group">
+            <input
+              type="search"
+              class="search-input"
+              placeholder="What are you looking for?"
+              [ngModel]="searchQuery()"
+              (ngModelChange)="searchQuery.set($event)"
+              name="searchQuery"
+              aria-label="Search"
+              (keyup.enter)="onSearch()"
+            />
+            <div class="search-divider"></div>
+            <select class="search-select" 
+                    [ngModel]="selectedCategory()" 
+                    (ngModelChange)="selectedCategory.set($event)"
+                    name="selectedCategory" 
+                    aria-label="Category">
+              <option *ngFor="let cat of categories()" [value]="cat.value">{{ cat.label }}</option>
+            </select>
+            <button type="submit" class="search-btn">Search</button>
+          </div>
+        </form>
+
+        <!-- RIGHT: icon buttons -->
+        <div class="toolbar-right">
+          <!-- Search icon (mobile only) -->
+          <button mat-icon-button aria-label="Search" class="show-mobile" (click)="toggleMobileSearch()">
+            <mat-icon>search</mat-icon>
+          </button>
+          <!-- Wishlist -->
+          <button mat-icon-button [attr.aria-label]="'Wishlist (' + wishlistCount() + ' items)'">
+            <mat-icon
+              [matBadge]="wishlistCount() > 0 ? wishlistCount() : null"
+              matBadgeColor="warn"
+            >favorite_border</mat-icon>
+          </button>
+          <!-- Cart -->
+          <div class="cart-wrapper">
+            <button mat-icon-button [attr.aria-label]="'Cart (' + cartItems().length + ' items)'" routerLink="/cart">
+              <mat-icon 
+                [matBadge]="cartItems().length > 0 ? cartItems().length.toString() : null" 
+                [matBadgeHidden]="cartItems().length === 0"
+                matBadgeColor="warn" 
+              >shopping_bag</mat-icon>
+            </button>
+            <div class="cart-popup">
+              <div class="cart-popup-header">
+                {{ cartItems().length | number:'2.0-0' }} item(s) in Cart
+              </div>
+              <div class="cart-popup-items" *ngIf="cartItems().length > 0; else tempEmpty">
+                <div class="cart-popup-item" *ngFor="let item of cartItems()">
+                  <div class="cp-image">
+                    <img *ngIf="item.product.imageUrl; else noPopupImg" [src]="item.product.imageUrl" [alt]="item.product.title" />
+                    <ng-template #noPopupImg><span class="placeholder-text">{{ item.product.imageRatio }}</span></ng-template>
+                  </div>
+                  <div class="cp-details">
+                    <p class="cp-title">{{ item.product.title }}</p>
+                    <p class="cp-qty">{{ item.quantity }} x {{ item.product.price }}</p>
+                  </div>
+                  <button class="cp-remove" (click)="removeFromCart(item.product.id)" aria-label="Remove item">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <ng-template #tempEmpty>
+                <div class="cart-popup-empty">
+                  Your cart is empty.
+                </div>
+              </ng-template>
+              <div class="cart-popup-footer" *ngIf="cartItems().length > 0">
+                <div class="cp-total">
+                  <span>Total</span>
+                  <span class="cp-price">${{ cartTotal() | number:'1.2-2' }}</span>
+                </div>
+                <div class="cp-actions">
+                  <a routerLink="/cart" class="cp-btn-cart">View Cart</a>
+                  <button class="cp-btn-checkout">Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </mat-toolbar>
+
+      <!-- Mobile search slide-down -->
+      <div class="top-bar__mobile-search show-mobile" [class.is-open]="mobileSearchOpen">
+        <div class="mobile-search-inner">
+          <mat-icon class="mobile-search-prefix">search</mat-icon>
+          <input
+            type="search"
+            class="mobile-search-input"
+            placeholder="What are you looking for?"
+            [ngModel]="searchQuery()"
+            (ngModelChange)="searchQuery.set($event)"
+            name="mobileSearchQuery"
+            aria-label="Search"
+            (keyup.enter)="onSearch()"
+          />
+          <button mat-icon-button aria-label="Close" (click)="toggleMobileSearch()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- ── Secondary Nav Strip ──────────────────────────────────── -->
+    <nav class="nav-strip hide-mobile" aria-label="Secondary navigation">
+      <div class="nav-strip__inner">
+        <!-- Category trigger -->
+        <button class="nav-strip__category" aria-label="Browse categories">
+          <mat-icon class="category-icon">menu</mat-icon>
+          <span>Category</span>
+          <mat-icon class="category-chevron">keyboard_arrow_down</mat-icon>
+        </button>
+        <!-- Center nav links -->
+        <ul class="nav-strip__links" role="list">
+          <li *ngFor="let item of secondaryNavLinks">
+            <a [href]="item.href" class="nav-strip__link">
+              {{ item.label }}
+              <mat-icon *ngIf="item.hasDropdown" class="link-chevron">keyboard_arrow_down</mat-icon>
+              <span *ngIf="item.badge" class="nav-strip__badge">{{ item.badge }}</span>
+            </a>
+          </li>
+        </ul>
+        <!-- Right actions -->
+        <div class="nav-strip__actions">
+          <a *ngFor="let action of rightActions" [href]="action.href" class="nav-strip__action">
+            <mat-icon>{{ action.icon }}</mat-icon>
+            <span>{{ action.label }}</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <router-outlet />
+
+    <app-footer></app-footer>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

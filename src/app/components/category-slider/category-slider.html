@@ -1,0 +1,50 @@
+<div class="category-slider">
+  <div class="category-header">
+    <h2 class="category-header__title">Shop By Categories</h2>
+    <div class="category-header__controls">
+      <a href="#" class="see-all-link">See All</a>
+      <button mat-icon-button class="nav-btn" (click)="scrollLeft(track)" aria-label="Scroll left">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button mat-icon-button class="nav-btn" (click)="scrollRight(track)" aria-label="Scroll right">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="category-track-container">
+    <div class="category-track" #track>
+      <div 
+        *ngFor="let cat of categories; let i = index" 
+        class="category-card"
+        [class.category-card--active]="cat.active"
+        (click)="selectCategory(cat)"
+      >
+        <div class="category-card__inner">
+          <mat-icon class="category-icon">{{ cat.icon }}</mat-icon>
+          <span class="category-label">
+            {{ cat.label }}
+            <br *ngIf="cat.subLabel" />
+            {{ cat.subLabel }}
+          </span>
+        </div>
+        <!-- Caret pointer for active state -->
+        <div class="category-card__caret" *ngIf="cat.active"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-grid">
+    <app-product-card
+      *ngFor="let product of products()"
+      [badgeText]="product.badgeText"
+      [badgeType]="product.badgeType"
+      [title]="product.title"
+      [price]="product.price"
+      [originalPrice]="product.originalPrice"
+      [vendor]="product.vendor"
+      [imageUrl]="product.imageUrl"
+      [product]="product">
+    </app-product-card>
+  </div>
+</div>

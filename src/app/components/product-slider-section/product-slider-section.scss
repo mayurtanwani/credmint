@@ -1,0 +1,135 @@
+:host {
+  display: block;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.p-slider-section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.p-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  
+  // Responsive header stacking
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+
+.p-slider-nav {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  // hide scrollbars
+  &::-webkit-scrollbar { display: none; }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #888;
+    text-decoration: none;
+    padding-bottom: 4px;
+    white-space: nowrap;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #111;
+    }
+
+    &.active {
+      color: #7bc05b; // active green
+      border-bottom: 2px solid #7bc05b;
+    }
+  }
+}
+
+.nav-controls {
+  display: flex;
+  gap: 8px;
+
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    background: #fdfdfd; // matched design? Actually no background, just standard ghost button logic typically
+    border-radius: 4px;
+    
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+    }
+
+    &:hover {
+      background: #eee;
+      color: #111;
+    }
+  }
+}
+
+.p-slider-track-container {
+  overflow: hidden; // hide scrollbar layout if needed, though track handles it
+  padding-bottom: 20px; // account for box-shadow hover state of cards
+  margin-left: -5px; // slightly offset padding
+  padding-left: 5px;
+}
+
+.p-slider-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  // hide scrollbars
+  &::-webkit-scrollbar { display: none; }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.card-wrapper {
+  flex: 0 0 180px; // Standard dimension for product grid column. A bit wider than 160. Let's make it 200px.
+  min-width: 180px;
+
+  &--3-2 {
+    flex: 0 0 250px;
+    min-width: 250px;
+  }
+
+  // Let the child app-product-card expand naturally
+  app-product-card {
+    height: 100%;
+    display: block; // important so that margin/flex works properly
+  }
+}

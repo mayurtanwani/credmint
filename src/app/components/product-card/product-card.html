@@ -1,0 +1,26 @@
+<article class="product-card">
+  <div class="product-card__image-container" [class.product-card__image-container--3-2]="imageRatio === '3:2'">
+    <div *ngIf="badgeType !== 'none'" class="product-card__badge" [ngClass]="'product-card__badge--' + badgeType">
+      {{ badgeText }}
+    </div>
+    <!-- Show image if URL is provided, otherwise show placeholder -->
+    <img *ngIf="imageUrl" [src]="imageUrl" [alt]="title" class="product-card__image" />
+    <div *ngIf="!imageUrl" class="product-card__image-placeholder">
+      <span class="placeholder-text">{{ imageRatio }}</span>
+    </div>
+    <button class="product-card__add-to-cart" (click)="addToCart($event)">Add To Cart</button>
+  </div>
+
+  <div class="product-card__content">
+    <h3 class="product-card__title" [title]="title">{{ title }}</h3>
+    
+    <div class="product-card__price-row">
+      <span class="product-card__price">{{ price }}</span>
+      <span *ngIf="originalPrice" class="product-card__original-price">{{ originalPrice }}</span>
+    </div>
+
+    <div class="product-card__vendor">
+      by <a href="#" class="vendor-link">{{ vendor }}</a>
+    </div>
+  </div>
+</article>

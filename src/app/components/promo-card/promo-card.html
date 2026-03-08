@@ -1,0 +1,12 @@
+<article class="promo-card" [class.promo-card--has-btn]="buttonText" [class.promo-card--centered]="layout === 'center'" [class.promo-card--end]="layout === 'end'">
+  <p class="promo-card__category">{{ category }}</p>
+  <h3 class="promo-card__title" [innerHTML]="title"></h3>
+  <p *ngIf="subtitle" class="promo-card__subtitle">{{ subtitle }}</p>
+  <button
+    *ngIf="buttonText"
+    class="promo-card__btn"
+    [class.promo-card__btn--outline]="buttonVariant === 'outline'"
+  >
+    {{ buttonText }}
+  </button>
+</article>

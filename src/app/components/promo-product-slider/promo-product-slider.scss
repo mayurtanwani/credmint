@@ -1,0 +1,92 @@
+:host {
+  display: block;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.promo-product-slider {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .see-all-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: #7bc05b;
+      text-decoration: none;
+      margin-right: 12px;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .nav-btn {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      background: #f9f9f9;
+      border-radius: 4px;
+      
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+      }
+
+      &:hover {
+        background: #eee;
+        color: #111;
+      }
+    }
+  }
+}
+
+.track-container {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  // hide scrollbars
+  &::-webkit-scrollbar { display: none; }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.card-wrapper {
+  flex: 0 0 calc(50% - 15px); // 2 cards visible at once
+  min-width: 480px;
+
+  @media (max-width: 768px) {
+    flex: 0 0 100%;
+    min-width: unset;
+  }
+}
